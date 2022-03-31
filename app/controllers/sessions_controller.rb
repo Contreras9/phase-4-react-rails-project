@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
     skip_before_action :authorized_coder, only: [:login]
     
     def login
+    
         coder = Coder.find_by(name:params[:name])
         if coder&.authenticate(params[:password])
             session[:name] = coder.name

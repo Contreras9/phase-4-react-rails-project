@@ -7,8 +7,8 @@ class LessonsController < ApplicationController
 
     def show
         lesson = Lesson.find(params[:id])
-            # solved = lesson.submissions.find_by{|submission| submission.coder.name == session[:name]}
-            if true
+            solved = Submission.where(lesson_id: params[:id], coder_id: loggedIn_coder.id) != []
+            if solved
                 render json: lesson, serializer: LessonSolvedSerializer, status: :ok
             else
                 render json: lesson, serializer: LessonPrivateSerializer, status: :ok

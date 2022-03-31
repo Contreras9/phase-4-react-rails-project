@@ -6,11 +6,9 @@ class CodersController < ApplicationController
     end
 
     def show_dashboard
-        if loggedIn_coder
-            render json: loggedIn_coder, serializer: CoderDashboardSerializer, status: :ok
-        else
-            render json: "No current user", status: :unauthorized
-        end
+        unsolved = Lesson.where {|lesson| lesson.submissions.where(coder_id: loggedIn_coder.id) == []} 
+        render json: unsolved, status: :ok  
+      
     end
 
     def show_profile

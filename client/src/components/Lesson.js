@@ -3,31 +3,70 @@ import { useParams, useNavigate } from "react-router-dom";
 
 function Lesson( {user} ) {
 
-    const [lesson, setLesson] = useState()
-    let {id} = useParams()
-    let navigate = useNavigate();
+   const [lesson, setLesson] = useState()
+	const [code, setCode] = useState("test");
+   let {id} = useParams()
+   let navigate = useNavigate();
+
 
     if (user === null) {
         navigate("/login")
     }
-    
-    useEffect(() => {
-        fetch(`/lessons/${id}`, {
-            method:"GET",
-            headers: {
-                "Content_type": "application/json"
-            }
+
+	
+	 function fetchLesson()
+	 {
+		fetch(`/lessons/${id}`, {
+			method:"GET",
+			headers: {
+				 "Content-Type": "application/json"
+			}
+	  })
+	  .then(res => res.json())
+	  .then(res => {
+		  console.log("lesson: ")
+			console.log(res);
+			setLesson(res)
+			
+	  })
+
+	 }
+
+	 useEffect(fetchLesson, []);
+
+
+
+	 function clickHandler(e) {
+		 e.preventDefault()
+
+
+		fetch('http://localhost:4000/submissions', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({lesson_id : lesson.id, code_solution: code})
         })
-        .then(res => res.json())
         .then(res => {
-            console.log(res);
-            setLesson(res)
-        })
-    }, [])
+            if(res.ok){
+              res.json()
+              .then(fetchLesson)
+            } else {
+              res.json()
+              .then(json => console.log(json.error))
+            }
+          })
+	
+	 }
+
+	 
+	 
 
 
     console.log(lesson)
+
     if (lesson) 
+
+	 
+	 
     return (
             
             <section className="page-section single-blog-page spad">
@@ -47,7 +86,7 @@ function Lesson( {user} ) {
 						<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque id nibh ac congue. Nullam dignissim egestas velit eget tempor. Morbi nec dolor neque. Maecenas quis tincidunt turpis. Cras ultricies pulvinar odio, sit amet lobortis lorem consectetur at. Vivamus risus erat, eleifend a nunc non, lacinia ultrices ante. Suspendisse a lacus at metus convallis maximus. Vivamus fringilla ipsum dolor. Cras pellentesque turpis id lacus condimentum condimentum. Sed tincidunt velit et urna eleifend imperdiet. Quisque euismod nibh at urna pellentesque, sit amet bibendum nibh fringilla. Sed dignissim varius blandit.</p>
 						<p>Donec venenatis at eros sit amet aliquam. Donec vel orci efficitur, dictum nisl vitae, scelerisque nibh. Curabitur eget ipsum pulvinar nunc gravida interdum. Aenean lectus felis, rutrum non quam eu, accumsan semper ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut accumsan, mauris nec venenatis gravida, lacus est gravida augue, eu egestas lorem nisi nec nibh. Mauris luctus porttitor elit, ac efficitur nulla consectetur a. Pellentesque scelerisque pulvinar magna sit amet auctor. Fusce tincidunt convallis elit ante, nec ullamcorper ante rhoncus mollis. </p>
 					</div>
-					<div className="comment-warp">
+					{/* <div className="comment-warp">
 						<h4 className="comment-title">Top Coments</h4>
 						<ul className="comment-list">
 							<li>
@@ -71,12 +110,45 @@ function Lesson( {user} ) {
 								</div>
 							</li>
 						</ul>
+					</div> */}
+{
+
+		lesson.submissions ?  
+		
+		<div className="comment-warp">
+		<h4 className="comment-title">Top Coments</h4>
+		<ul className="comment-list">
+		{
+			lesson.submissions.map(sub =>
+			 <li>
+				<div className="comment">
+					<div className="comment-avator set-bg" style={{backgroundImage: `url("/img/authors/1.jpg")`}}></div>
+					<div className="comment-content">
+						<h5>{"John"} <span>June 21, 2018</span></h5>
+						<p> {sub.code_solution} </p>
+						<a href="" className="reply">Reply</a>
 					</div>
-					<div className="comment-form-warp">
+				</div>
+			</li>
+			)
+
+		}
+			
+			
+		</ul>
+	</div> 
+	
+	
+	: 
+
+	<div className="comment-form-warp">
 						<h4 className="comment-title">Leave Your Comment</h4>
 						<form className="comment-form">
 							<div className="row">
-								<div className="col-md-6">
+							<textarea placeholder="Message" onChange={(e) => setCode(e.target.value)} value={code} ></textarea>
+									<button className="site-btn btn-sm" onClick={clickHandler}>Send</button>
+							
+								{/* <div className="col-md-6">
 									<input type="text" placeholder="Name" />
 								</div>
 								<div className="col-md-6">
@@ -86,10 +158,15 @@ function Lesson( {user} ) {
 									<input type="text" placeholder="Subject" />
 									<textarea placeholder="Message"></textarea>
 									<button className="site-btn btn-sm">Send</button>
-								</div>
+								</div> */}
+
 							</div>
 						</form>
 					</div>
+
+}
+
+				
 				</div>
 				
 				<div className="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
@@ -184,7 +261,8 @@ function Lesson( {user} ) {
 			</div>
 		</div>
 	</section> 
-    ); else {
+
+    ) ; else {
         return <span>"Loading"</span>
     }
 }
