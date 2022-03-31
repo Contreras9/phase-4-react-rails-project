@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2022_03_26_173502) do
   create_table "lessons", force: :cascade do |t|
     t.string "test_case_file"
     t.string "title"
+    t.string "image"
     t.string "short_description"
     t.string "task"
     t.datetime "created_at", precision: 6, null: false

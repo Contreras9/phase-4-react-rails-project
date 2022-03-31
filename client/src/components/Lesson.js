@@ -72,8 +72,8 @@ function Lesson( {user} ) {
             <section className="page-section single-blog-page spad">
 		<div className="container">
 			<div className="row">
-				<div className="col-lg-8">
-					<div className="blog-thumb set-bg" style={{backgroundImage: `url("/img/recent-game/big.jpg")`}}>
+				<div className="col-lg-12">
+					<div className="blog-thumb set-bg" style={{backgroundImage: 'url("/img/lessons/' + lesson.image  + '")'}}>
 						<div className="cata new">new</div>
 						<div className="rgi-extra">
 							<div className="rgi-star"><img src="/img/icons/star.png" alt="" /></div>
@@ -83,8 +83,7 @@ function Lesson( {user} ) {
 					<div className="blog-content">
 						<h3>{lesson.title}</h3>
 						<a href="" className="meta-comment">3 comment</a>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit. Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit amet, consectetur elit.  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque id nibh ac congue. Nullam dignissim egestas velit eget tempor. Morbi nec dolor neque. Maecenas quis tincidunt turpis. Cras ultricies pulvinar odio, sit amet lobortis lorem consectetur at. Vivamus risus erat, eleifend a nunc non, lacinia ultrices ante. Suspendisse a lacus at metus convallis maximus. Vivamus fringilla ipsum dolor. Cras pellentesque turpis id lacus condimentum condimentum. Sed tincidunt velit et urna eleifend imperdiet. Quisque euismod nibh at urna pellentesque, sit amet bibendum nibh fringilla. Sed dignissim varius blandit.</p>
-						<p>Donec venenatis at eros sit amet aliquam. Donec vel orci efficitur, dictum nisl vitae, scelerisque nibh. Curabitur eget ipsum pulvinar nunc gravida interdum. Aenean lectus felis, rutrum non quam eu, accumsan semper ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut accumsan, mauris nec venenatis gravida, lacus est gravida augue, eu egestas lorem nisi nec nibh. Mauris luctus porttitor elit, ac efficitur nulla consectetur a. Pellentesque scelerisque pulvinar magna sit amet auctor. Fusce tincidunt convallis elit ante, nec ullamcorper ante rhoncus mollis. </p>
+						<p> {lesson.task} </p>
 					</div>
 					{/* <div className="comment-warp">
 						<h4 className="comment-title">Top Coments</h4>
@@ -124,7 +123,7 @@ function Lesson( {user} ) {
 				<div className="comment">
 					<div className="comment-avator set-bg" style={{backgroundImage: `url("/img/authors/1.jpg")`}}></div>
 					<div className="comment-content">
-						<h5>{"John"} <span>June 21, 2018</span></h5>
+						<h5>{sub.coder.name} <span>June 21, 2018</span></h5>
 						<p> {sub.code_solution} </p>
 						<a href="" className="reply">Reply</a>
 					</div>
@@ -142,7 +141,7 @@ function Lesson( {user} ) {
 	: 
 
 	<div className="comment-form-warp">
-						<h4 className="comment-title">Leave Your Comment</h4>
+						<h4 className="comment-title">Submit your code: </h4>
 						<form className="comment-form">
 							<div className="row">
 							<textarea placeholder="Message" onChange={(e) => setCode(e.target.value)} value={code} ></textarea>
@@ -169,7 +168,7 @@ function Lesson( {user} ) {
 				
 				</div>
 				
-				<div className="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
+				{/* <div className="col-lg-4 col-md-7 sidebar pt-5 pt-lg-0">
 					
 					<div className="widget-item">
 						<form className="search-widget">
@@ -257,7 +256,7 @@ function Lesson( {user} ) {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	</section> 

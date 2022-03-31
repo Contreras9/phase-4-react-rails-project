@@ -7,7 +7,7 @@ class CodersController < ApplicationController
 
     def show_dashboard
         unsolved = Lesson.where {|lesson| lesson.submissions.where(coder_id: loggedIn_coder.id) == []} 
-        render json: unsolved, status: :ok  
+        render json: unsolved, each_serializer: LessonPublicSerializer,  status: :ok  
       
     end
 

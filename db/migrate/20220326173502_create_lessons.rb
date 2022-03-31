@@ -3,6 +3,7 @@ class CreateLessons < ActiveRecord::Migration[6.1]
     create_table :lessons do |t|
       t.string :test_case_file
       t.string :title
+      t.string :image
       t.string :short_description
       t.string :task
 

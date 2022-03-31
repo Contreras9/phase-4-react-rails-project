@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   post "/login", to: "sessions#login"
+  get "authorized_coder", to: "sessions#authorized"
   post "/submissions", to: "submissions#create"
   get "/show_profile/:name", to: "coders#show_profile"
   get "/show_dashboard", to: "coders#show_dashboard"
