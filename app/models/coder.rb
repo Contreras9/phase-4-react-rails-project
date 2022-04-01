@@ -15,4 +15,8 @@ class Coder < ApplicationRecord
      lessons
   end
 
+  def solved_count
+    lessons_solved.count
+  end
+
 end

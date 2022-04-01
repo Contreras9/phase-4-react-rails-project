@@ -28,11 +28,8 @@ function Navigation({ setUser, user}) {
 			</div>
 			<nav className="main-menu">
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="review.html">Games</a></li>
-					<li><a href="categories.html">Blog</a></li>
-					<li><a href="community.html">Forums</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><Link to="/">Home</Link></li>
+					{ user ? <li><Link to="/dashboard">Dashboard</Link></li> : <li><Link to="/signup">Signup</Link></li> }
 				</ul>
 			</nav>
 		</div>

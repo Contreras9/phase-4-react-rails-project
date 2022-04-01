@@ -1,6 +1,31 @@
-import React from "react";
+import React , {useEffect, useState} from "react";
+
+
 
 function Footer() {
+
+
+	const [highscore, setHighscore] = useState([])
+
+   useEffect(() => {
+      fetch("/highscore", {
+         method:"GET",
+         headers: {
+            "Content-Type": "application/json"
+         }
+      })
+      .then(res => res.json())
+      .then(res => {
+         console.log(res);
+         setHighscore(res)
+      })
+   }, [])
+
+
+
+    
+
+
     return (
         <section className="footer-top-section">
 		<div className="container">
@@ -11,11 +36,10 @@ function Footer() {
 				<div className="col-lg-4">
 					<div className="footer-logo text-white">
 						<img src="/img/footer-logo.png" alt="" />
-						<p>Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor sit ame.</p>
 					</div>
 				</div>
 				<div className="col-lg-4 col-md-6">
-					<div className="footer-widget mb-5 mb-md-0">
+					{/* <div className="footer-widget mb-5 mb-md-0">
 						<h4 className="fw-title">Latest Posts</h4>
 						<div className="latest-blog">
 							<div className="lb-item">
@@ -43,40 +67,26 @@ function Footer() {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 				<div className="col-lg-4 col-md-6">
 					<div className="footer-widget">
-						<h4 className="fw-title">Top Comments</h4>
+						<h4 className="fw-title">Top Coders</h4>
 						<div className="top-comment">
-							<div className="tc-item">
-								<div className="tc-thumb set-bg" style={{backgroundImage: `url("/img/authors/1.jpg")`}}></div>
-								<div className="tc-content">
-									<p><a href="/">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-									<div className="tc-date">June 21, 2018</div>
-								</div>
+
+						{ highscore.map(c =>
+
+						<div className="tc-item" key={c.id}>
+							<div className="tc-thumb set-bg" style={{backgroundImage: `url("/img/authors/1.jpg")`}}></div>
+							<div className="tc-content">
+								<p> {c.name} <span>from</span>  {c.country}</p>
+								<p><span>is</span> {c.age} <span>years old</span></p>
 							</div>
-							<div className="tc-item">
-								<div className="tc-thumb set-bg" style={{backgroundImage: `url("/img/authors/2.jpg")`}}></div>
-								<div className="tc-content">
-									<p><a href="/">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-									<div className="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div className="tc-item">
-								<div className="tc-thumb set-bg" style={{backgroundImage: `url("/img/authors/3.jpg")`}}></div>
-								<div className="tc-content">
-									<p><a href="/">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-									<div className="tc-date">June 21, 2018</div>
-								</div>
-							</div>
-							<div className="tc-item">
-								<div className="tc-thumb set-bg" data-setbg="/img/authors/4.jpg"></div>
-								<div className="tc-content">
-									<p><a href="/">James Smith</a> <span>on</span>  Lorem ipsum dolor sit amet, co</p>
-									<div className="tc-date">June 21, 2018</div>
-								</div>
-							</div>
+						</div>
+
+						)}
+
+							
 						</div>
 					</div>
 				</div>

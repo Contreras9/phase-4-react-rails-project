@@ -716,10 +716,12 @@ ol {
   Footer top Section
 ------------------------*/
 
+
+
 .footer-top-section {
-	background-image: url("../img/pattern.png");
-	background-repeat: repeat;
+	background-color: #252525;
 	padding: 72px 0;
+	height: 120vh;
 }
 
 .footer-top-section .container {

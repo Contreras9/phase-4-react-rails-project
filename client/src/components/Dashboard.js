@@ -48,7 +48,6 @@ function Dashboard({user}) {
 							<div className="rgi-content">
 								<h5> {lesson.title} </h5>
 								<p> {lesson.short_description} </p>
-								<a href="/" className="comment"> 3 Submissions</a>
 								<div className="rgi-extra">
 										<div className="rgi-star"><img src="img/icons/star.png" alt="" />
 										</div>

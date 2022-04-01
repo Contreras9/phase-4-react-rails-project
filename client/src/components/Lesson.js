@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 function Lesson( {user} ) {
 
-   const [lesson, setLesson] = useState()
+   const [lesson, setLesson] = useState(null)
 	const [code, setCode] = useState("test");
    let {id} = useParams()
    let navigate = useNavigate();
@@ -65,8 +65,6 @@ function Lesson( {user} ) {
 
     if (lesson) 
 
-	 
-	 
     return (
             
             <section className="page-section single-blog-page spad">

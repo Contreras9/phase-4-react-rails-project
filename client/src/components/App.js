@@ -2,8 +2,9 @@
 import { Route, Routes } from "react-router-dom"
 import { useState, useEffect } from 'react';
 import Navigation from './Navigation';
-import Login from './Login';
-import Highscore from "./Highscore";
+import Login from './LoginModal/Login';
+
+import Signup from './LoginModal/Signup';
 import Coderprofile from "./Coderprofile";
 import Lesson from "./Lesson";
 import Dashboard from './Dashboard';
@@ -45,9 +46,7 @@ function App() {
    <div>
       <Navigation setUser={setUser} user={user} />
       <Routes>
-         <Route exact path='/' element={
-         <Highscore />
-      } />
+      
       <Route path="/profile/:name" element={
          <Coderprofile />
       } />
@@ -60,6 +59,11 @@ function App() {
       <Route path="/login" element={
          <Login setUser={setUser} />
       } />
+
+      <Route path="/signup" element={
+         <Signup/>
+      } />
+      
       </Routes>
       <Footer />
    </div>
