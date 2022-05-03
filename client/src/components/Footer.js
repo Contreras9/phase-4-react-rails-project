@@ -35,7 +35,7 @@ function Footer() {
 			<div className="row">
 				<div className="col-lg-4">
 					<div className="footer-logo text-white">
-						<img src="/img/footer-logo.png" alt="" />
+						<img src="https://flatironschool.com/wp-content/themes/flatiron-school/assets/images/logo-white.svg" alt="" />
 					</div>
 				</div>
 				<div className="col-lg-4 col-md-6">
@@ -77,7 +77,7 @@ function Footer() {
 						{ highscore.map(c =>
 
 						<div className="tc-item" key={c.id}>
-							<div className="tc-thumb set-bg" style={{backgroundImage: `url("/img/authors/1.jpg")`}}></div>
+							<div className="tc-thumb set-bg" style={{backgroundImage: `url("/img/authors/8.jpg")`}}></div>
 							<div className="tc-content">
 								<p> {c.name} <span>from</span>  {c.country}</p>
 								<p><span>is</span> {c.age} <span>years old</span></p>

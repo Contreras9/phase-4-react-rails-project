@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
 
 function Lesson( {user} ) {
 
    const [lesson, setLesson] = useState(null)
-	const [code, setCode] = useState("test");
+	const [code, setCode] = useState("");
    let {id} = useParams()
    let navigate = useNavigate();
+	const [output, setOutput] = useState("")
 
 
     if (user === null) {
         navigate("/login")
     }
 
-	
+	 const date = new Date().toLocaleDateString('en-us', {year:"numeric", month:"short", day:"numeric"})
 	 function fetchLesson()
 	 {
 		fetch(`/lessons/${id}`, {
@@ -27,6 +30,7 @@ function Lesson( {user} ) {
 		  console.log("lesson: ")
 			console.log(res);
 			setLesson(res)
+			setCode(res.test_case_file)
 			
 	  })
 
@@ -57,6 +61,11 @@ function Lesson( {user} ) {
 	
 	 }
 
+	 function runHandler(e) {
+		 e.preventDefault()
+		 setOutput(`${eval(code)}`)
+	 }
+
 	 
 	 
 
@@ -74,13 +83,13 @@ function Lesson( {user} ) {
 					<div className="blog-thumb set-bg" style={{backgroundImage: 'url("/img/lessons/' + lesson.image  + '")'}}>
 						<div className="cata new">new</div>
 						<div className="rgi-extra">
-							<div className="rgi-star"><img src="/img/icons/star.png" alt="" /></div>
-							<div className="rgi-heart"><img src="/img/icons/heart.png" alt="" /></div>
+							{/* <div className="rgi-star"><img src="/img/icons/star.png" alt="" /></div>
+							<div className="rgi-heart"><img src="/img/icons/heart.png" alt="" /></div> */}
 						</div>
 					</div>
 					<div className="blog-content">
 						<h3>{lesson.title}</h3>
-						<a href="" className="meta-comment">3 comment</a>
+						{/* <a href="" className="meta-comment">3 comment</a> */}
 						<p> {lesson.task} </p>
 					</div>
 					{/* <div className="comment-warp">
@@ -113,15 +122,15 @@ function Lesson( {user} ) {
 		lesson.submissions ?  
 		
 		<div className="comment-warp">
-		<h4 className="comment-title">Top Coments</h4>
+		<h4 className="comment-title">Submissions</h4>
 		<ul className="comment-list">
 		{
 			lesson.submissions.map(sub =>
 			 <li>
 				<div className="comment">
-					<div className="comment-avator set-bg" style={{backgroundImage: `url("/img/authors/1.jpg")`}}></div>
+					<div className="comment-avator set-bg" style={{backgroundImage: `url("/img/authors/8.jpg")`}}></div>
 					<div className="comment-content">
-						<h5>{sub.coder.name} <span>June 21, 2018</span></h5>
+						<h5>{sub.coder.name} <span>{date}</span></h5>
 						<p> {sub.code_solution} </p>
 						<a href="" className="reply">Reply</a>
 					</div>
@@ -142,8 +151,29 @@ function Lesson( {user} ) {
 						<h4 className="comment-title">Submit your code: </h4>
 						<form className="comment-form">
 							<div className="row">
-							<textarea placeholder="Message" onChange={(e) => setCode(e.target.value)} value={code} ></textarea>
-									<button className="site-btn btn-sm" onClick={clickHandler}>Send</button>
+							{/* <textarea placeholder="Message" onChange={(e) => setCode(e.target.value)} value={code} ></textarea> */}
+							<div>
+							<CodeMirror
+    						value={code}
+      					height="200px"
+							width="500px"
+      					extensions={[javascript({ jsx: true })]}
+      					onChange={(value, viewUpdate) => {
+								setCode(value)
+      					}}
+    						/>
+							 <br />
+							 <CodeMirror
+    						value={output}
+      					height="200px"
+							width="500px"
+      					extensions={[javascript({ jsx: true })]}
+      					onChange={() => {
+								
+      					}}
+    						/>
+							  </div>
+									
 							
 								{/* <div className="col-md-6">
 									<input type="text" placeholder="Name" />
@@ -158,6 +188,9 @@ function Lesson( {user} ) {
 								</div> */}
 
 							</div>
+							<br />
+							<button className="site-btn btn-sm" onClick={clickHandler}>Submit</button>
+							<button className="site-btn btn-sm" onClick={runHandler}>Run</button>
 						</form>
 					</div>
 

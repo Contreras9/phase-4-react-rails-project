@@ -11,7 +11,6 @@ import Dashboard from './Dashboard';
 import Footer from "./Footer";
 
 function App() {
-   const [errors, setErrors] = useState(false)
 
    const [user, setUser] = useState(null)
 

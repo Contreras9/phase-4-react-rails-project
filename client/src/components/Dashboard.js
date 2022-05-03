@@ -40,7 +40,7 @@ function Dashboard({user}) {
 
 
 					{lessons.map(lesson => (
-					<div className="col-lg-4 col-md-6">
+					<div className="col-lg-4 col-md-6" style={{"padding-top": "20px"}}>
 						<div className="recent-game-item">
 					<Link to={`/lessons/${lesson.id}`}>
 						<div className="rgi-thumb set-bg" style={{backgroundImage: 'url("/img/lessons/' + lesson.image  + '")'}}>

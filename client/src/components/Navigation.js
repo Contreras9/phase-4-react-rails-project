@@ -16,9 +16,9 @@ function Navigation({ setUser, user}) {
 	<header className="header-section">
 		<div className="container">
 		
-			<a className="site-logo" href="index.html">
-				<img src="/img/logo.png" alt="" />
-			</a>
+			<Link className="site-logo" to="/">
+				<img src="https://flatironschool.com/wp-content/themes/flatiron-school/assets/images/logo-white.svg" alt="" />
+			</Link>
 			<div className="user-panel">
             {user ? <span onClick={logout}>Logout</span> : <Link to="/login">Login</Link>}
 			</div>

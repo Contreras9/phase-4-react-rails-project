@@ -35,7 +35,10 @@ function Signup( {setUser} ) {
               })
             } else {
               res.json()
-              .then(json => setError(json.error))
+              .then(json => {
+                setError(json.error)
+                alert("Username already in use");
+              })
             }
           })
     }
@@ -47,7 +50,7 @@ function Signup( {setUser} ) {
         <h3>Signup Here</h3>
 
         <label for="username">Username</label>
-        <input value={name} onChange={e => setName(e.target.value) }type="text" placeholder="Email or Phone" id="username" />
+        <input value={name} onChange={e => setName(e.target.value) }type="text" placeholder="Username or Phone" id="username" />
 
         <label for="password">Password</label>
         <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder="Password" id="password" />
